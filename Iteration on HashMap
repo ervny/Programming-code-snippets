@@ -1,0 +1,57 @@
+# Various ways to iterate on any map
+We can't iterate a Map directly using iterator because Map is not  Collection.
+ And also we knnow that all maps in java implement Map interface. SO the following techniques will work for any map.
+ 
+##############################################################################
+Method 1:
+Iterating over Map.entrySet()
+code:
+HashMap<Integer, Integer> hm=new HashMap<>();
+for(Map.Entry<Integer,Integer> e:hm.entrySet())
+{
+	System.out.println(e.getValue());
+	System.out.println(e.getKey());
+}
+
+
+###############################################################################
+Method 2:
+Iterator<Map.Entry<Integer,Integer>> itr=hm.entrySet().iterator();
+while(itr.hasNext())
+{
+	Map<Integer, Integer> e=itr.next();
+	System.out.println(e.getKey());
+	System.out.println(e.getValue());
+}
+#This method has advanatage that we can remove entries from the map during iteration by calling iterator.remove() method.
+
+
+##################################################################################
+Method 3:
+#If we want only key or value
+
+for(Integer i:hm.keySet())
+	System.out.println(i);
+
+for(integer i:hm.values())
+	System.out.println(i);
+
+###############################################################################
+There are mainly three method  for iterating on Map.
+However there are two more method but they are not recommended.
+Method 4:
+In java 8, we can iterate a map using map.forEach(action) method and using lamda expression. This method is clean and fast.
+Code:
+hm.forEach((Key,Value) ->System.out.println("Key="+Key+" , value ="+value));
+
+method 5:
+Here first we loop over keys(using Map.keySet() method) and then search for value(using Map.get(key) method) for each key.
+This method is not used in practice as it is pretty slow and inefficient as getting values by a key might be time-consuming.
+
+code:
+for (Integer i : hm.keySet())  
+        { 
+            // search  for value 
+            Integer it = hm.get(i); 
+            System.out.println("Key = " + i + ", Value = " + it); 
+        } 
