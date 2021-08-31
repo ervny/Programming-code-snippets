@@ -1,0 +1,99 @@
+//sort array of string or int having large numbers
+
+Hint: Implement comparable interface
+
+
+class Solution {
+    public String kthLargestNumber(String[] nums, int k) {
+        
+        ArrayList<String> al= new ArrayList<>();
+        for(int i=0;i<nums.length;i++)
+            al.add(nums[i]);
+       Collections.sort(al, new MySort());
+        
+        return al.get(nums.length-k);
+        
+        
+    }
+}
+ 
+ public class MySort implements Comparator
+{
+    public int compare(Object obj1, Object obj2)
+    {
+        String s1 = (String)obj1;
+        String s2 = (String)obj2;
+        
+        if(s1.length() != s2.length())
+            return s1.length()- s2.length();
+        return s1.compareTo(s2);
+    }
+}
+
+*************************************************************************************************
+
+179. Largest Number
+
+Given a list of non-negative integers nums, arrange them such that they form the largest number.
+
+Note: The result may be very large, so you need to return a string instead of an integer.
+
+ 
+
+Example 1:
+
+Input: nums = [10,2]
+Output: "210"
+Example 2:
+
+Input: nums = [3,30,34,5,9]
+Output: "9534330"
+Example 3:
+
+Input: nums = [1]
+Output: "1"
+Example 4:
+
+Input: nums = [10]
+Output: "10"
+
+
+
+class Solution {
+    public String largestNumber(int[] nums) {
+        
+        ArrayList<String> al = new ArrayList<>();
+        for(int i=0;i<nums.length;i++)
+        {
+            Integer a = new Integer(nums[i]);
+            al.add(a.toString());
+        }
+        Collections.sort(al, new MySort());
+        System.out.println(al);
+        
+        StringBuilder sb = new StringBuilder();
+        for(int i=al.size()-1;i>=0;i--)
+        {
+            sb.append(al.get(i));
+        }
+        
+        if(sb.charAt(0)=='0')
+            return "0";
+        return sb.toString();
+        
+    }
+}
+
+public class MySort implements Comparator
+{
+    public int compare(Object obj1, Object obj2)
+    {
+        String s1 = (String)obj1;
+        String s2 = (String)obj2;
+        
+        String s1s2 = s1+s2;
+        String s2s1 = s2+s1;
+        return s1s2.compareTo(s2s1);
+    }
+}
+
